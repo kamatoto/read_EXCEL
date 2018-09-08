@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Sep  7 22:11:17 2018
+
+@author: soishi
+"""
+import os
+import numpy as np
+import string
+
+
+#csvファイルの場所
+file_dir=r"C:\Users\soishi\Documents\Visual Studio 2015\Projects\SelfCalibration_Stereo_Simulation\output"
+
+#ｃｓｖファイルの名前
+file_name=r"1frame-noise0.1.csv"
+
+#何行何列から読み込むか(例:3R,2S......excelの座標)
+excel_start="23R"
+#何行何列まで読み込むか(例:3R,2S......excelの座標)
+excel_end="532S"
+
+def chars_to_int(chars):#https://qiita.com/fumitoh/items/d70c6dfbd35a053a5706
+    ALPHABETS = string.ascii_uppercase
+    chars = chars.upper()
+    size = len(chars)
+    result = 0
+    for pos, c in enumerate(chars):
+        i = ALPHABETS.index(c) + 1
+        exp = size - pos - 1
+        result += i * 26 ** exp
+    return result
+
+def excel_pre(excel_start,excel_end):
+    def pre_len(excel_):
+        count=0
+        for i in excel_:
+            if not i.isdecimal():
+                break
+            count+=1      
+        excel_s=chars_to_int(excel_[count:])
+        excel_=[int(excel_[0:count]),excel_s]
+        return excel_
+    excel_num0=pre_len(excel_start)
+    excel_num1=pre_len(excel_end)
+    return (excel_num0,excel_num1)
+
+def read_file(file_dir,file_name,excel_num0,excel_num1):
+    os.chdir(file_dir)
+    data=np.genfromtxt(file_name, dtype = "float", 
+                       delimiter = ",",skip_header=excel_num0[0]-1,max_rows=excel_num1[0]-excel_num0[0]+1)
+    data=data[:,excel_num0[1]-1:excel_num1[1]]
+    return data
+
+
+excel_num0,excel_num1=excel_pre(excel_start,excel_end)
+data=read_file(file_dir,file_name,excel_num0,excel_num1)
+
