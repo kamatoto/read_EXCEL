@@ -9,15 +9,15 @@ import numpy as np
 import string
 
 
-#csvƒtƒ@ƒCƒ‹‚ÌêŠ
-file_dir=r"C:\Users\soishi\Documents\Visual Studio 2015\Projects\SelfCalibration_Stereo_Simulation\output"
+#csvãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€
+file_dir=r"file_position"
 
-#‚ƒ‚“‚–ƒtƒ@ƒCƒ‹‚Ì–¼‘O
+#ï½ƒï½“ï½–ãƒ•ã‚¡ã‚¤ãƒ«ã®åå‰
 file_name=r"1frame-noise0.1.csv"
 
-#‰½s‰½—ñ‚©‚ç“Ç‚İ‚Ş‚©(—á:3R,2S......excel‚ÌÀ•W)
+#ä½•è¡Œä½•åˆ—ã‹ã‚‰èª­ã¿è¾¼ã‚€ã‹(ä¾‹:3R,2S......excelã®åº§æ¨™)
 excel_start="23R"
-#‰½s‰½—ñ‚Ü‚Å“Ç‚İ‚Ş‚©(—á:3R,2S......excel‚ÌÀ•W)
+#ä½•è¡Œä½•åˆ—ã¾ã§èª­ã¿è¾¼ã‚€ã‹(ä¾‹:3R,2S......excelã®åº§æ¨™)
 excel_end="532S"
 
 def chars_to_int(chars):#https://qiita.com/fumitoh/items/d70c6dfbd35a053a5706
